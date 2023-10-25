@@ -13,13 +13,13 @@ const App = () => {
     <SafeAreaProvider>
       <NavigationContainer>
     <Stack.Navigator initialRouteName='Login'>
-      {/* <Stack.Group> */}
+ 
         <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
       
-        <Stack.Screen name='Signup' component={RegistrationScreen} />
-        {/* <Stack.Screen name="Navigator" component={Navigator} options={{headerShown:false}}/> */}
+        <Stack.Screen name='Signup' component={RegistrationScreen}  options={{headerShown:false}} />
+    
         <Stack.Screen name='BottomNavigation' component={BottomNavigation}  options={{headerShown:false}}/>
-      {/* </Stack.Group> */}
+  
     </Stack.Navigator>
     </NavigationContainer>
     </SafeAreaProvider>

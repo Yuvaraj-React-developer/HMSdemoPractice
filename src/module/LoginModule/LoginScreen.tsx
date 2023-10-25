@@ -3,20 +3,48 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, Pressable } from '
 import { Image, Input, Icon, CheckBox  } from '@rneui/themed';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
+import { Formik,Field } from 'formik';
+import * as Yup from 'yup';
 interface Screen {
     navigation: any;
+    replace:any
+  
 
   }
 const LoginScreen: React.FC<Screen> = () => {
     const navigation = useNavigation();
     const navigateToIndex = () => {
-        navigation.navigate('BottomNavigation'); // 'index' should match the name of your index screen in the navigator
+        // navigation.navigate('BottomNavigation'); // 'index' should match the name of your index screen in the navigator
+        navigation.replace('BottomNavigation');
       };
       const Gotoregistration = () =>{
         navigation.navigate('Signup');
-      }
+      };
+      const validationSchema = Yup.object().shape({
+        email: Yup.string().email('Invalid email').required('Email is required'),
+        password:Yup
+        .string()
+        .matches(/\w*[a-z]\w*/,  "Password must have a small letter")
+        .matches(/\w*[A-Z]\w*/,  "Password must have a capital letter")
+        .matches(/\d/, "Password must have a number")
+        .matches(/[!@#$%^&*()\-_"=+{}; :,<.>]/, "Password must have a special character")
+        .min(8, ({ min }) => `Password must be at least ${min} characters`)
+        .required('Password is required'),
+      });
 
     return (
+        <Formik
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        validationSchema={validationSchema}
+        onSubmit={(values) => {
+          console.log('Form values:', values);
+          navigateToIndex();
+        }}
+      >
+           {({ handleSubmit,handleBlur,handleChange,values,touched,errors }) => (
         <View style={styles.container}>
             <View style={styles.centeredContainer}>
                 <Image source={require('../../Components/Image/logo.png')} style={styles.image} />
@@ -25,20 +53,33 @@ const LoginScreen: React.FC<Screen> = () => {
                 <Text style={styles.TextHeader}>Login</Text>
             </View>
             <View style={styles.inputContainer}>
-             
+          
                 <TextInput
                     placeholder="Email"
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
                     style={styles.inputField}
-                    underlineColorAndroid="transparent" // Remove underline
+
                 />
+                 {touched.email && errors.email && (
+              <Text style={styles.errorText}>{errors.email}</Text>
+            )}
+             
                 <TextInput
-                    placeholder="Password"
-                    secureTextEntry
-                    style={styles.inputField}
+                
+                  placeholder="Password"
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                  secureTextEntry
+                  style={styles.inputField}
                 />
-                <View style={styles.acceptTermsContainer}>
- 
-                </View>
+                 {touched.password && errors.password && (
+              <Text style={styles.errorText}>{errors.password}</Text>
+            )}
+            
+               
             </View>
 
             <LinearGradient
@@ -47,22 +88,13 @@ const LoginScreen: React.FC<Screen> = () => {
                 end={{ x: 1, y: 0.5 }}
                 style={styles.buttonGradient}
             >
-                <Pressable
-                 onPress={navigateToIndex}
-         
-                    style={({ pressed }) => [
-                        styles.buttonStyle,
-                        {
-                            backgroundColor: pressed ? '#26b5b5' : 'transparent',
-                        },
-                    ]}
-                >
-                    {({ pressed }) => (
-                        <Text style={{ color: pressed ? 'white' : 'white', fontSize: 25, fontWeight: '400' }}>
-                            Login
-                        </Text>
-                    )}
-                </Pressable>
+                  <Pressable onPress={handleSubmit}>
+              {({ pressed }) => (
+                <Text style={{ color: pressed ? 'white' : 'white', fontSize: 25, fontWeight: '400' }}>
+                  Login
+                </Text>
+              )}
+            </Pressable>
             </LinearGradient>
 
             <TouchableOpacity onPress={Gotoregistration}>
@@ -71,6 +103,8 @@ const LoginScreen: React.FC<Screen> = () => {
                 </Text>
             </TouchableOpacity>
         </View>
+        )}
+        </Formik>
     );
 };
 
@@ -155,6 +189,10 @@ const styles = StyleSheet.create({
     label: {
         margin: 8,
     },
+    errorText: {
+        color: 'red',
+        fontSize: 16,
+    }
 
 });
 
