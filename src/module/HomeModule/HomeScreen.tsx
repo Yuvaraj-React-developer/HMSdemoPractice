@@ -1,187 +1,154 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
-interface ScreenOne {
-  navigation: any;
-}
-const HomeScreen: React.FC<ScreenOne> = ({navigation}) => {
+
+const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.profileContainer}>
-        <View style={styles.profileImage}>
-          <Image
-            source={{uri: 'https://i.ibb.co/5FqdZ0B/e1.jpg'}}
-            style={styles.userImage}
-          />
+    <ScrollView>
+      <View style={styles.homeContainer}>
+        <View style={styles.profileContainer}>
+          <View style={styles.profileImage}>
+            <Image
+              source={{uri: 'https://i.ibb.co/5FqdZ0B/e1.jpg'}}
+              style={styles.userImage}
+            />
+            <View style={styles.userTextContainer}>
+              <Text style={styles.userName}>Hi Enid</Text>
+              <Text style={styles.userCaption}>Welcome back !</Text>
+            </View>
+          </View>
+          <TouchableOpacity>
+            <Image
+              source={{
+                uri: 'https://i.ibb.co/HhLWNm7/images-1-removebg-preview.png',
+              }}
+              style={styles.searchImage}
+            />
+          </TouchableOpacity>
         </View>
-        <View style={styles.userInfo}>
-          <View style={styles.infoCounts}>
-            <View style={styles.imageControl}>
+      </View>
+      <View style={styles.iconContainer}>
+        <View style={styles.userOptions}>
+          <View style={styles.columnContainer}>
+            <View style={styles.iconCaptionContainer}>
               <Image
                 source={{
-                  uri: 'https://i.ibb.co/934ntsP/j1-removebg-preview.png',
+                  uri: 'https://i.ibb.co/fSKnSD4/h11-removebg-preview.png',
                 }}
-                style={styles.profileIcon}
+                style={styles.columnImage}
               />
+              <Text style={styles.iconCaption}>Clinic Visit</Text>
             </View>
-            <Text style={styles.countName}>Heart rate</Text>
-            <Text style={styles.countValue}>215bpm</Text>
+            <View style={styles.iconCaptionContainer}>
+              <Image
+                source={{
+                  uri: 'https://i.ibb.co/PjJW0vk/h12-removebg-preview.png',
+                }}
+                style={styles.columnImage}
+              />
+              <Text style={styles.iconCaption}>Home Visit</Text>
+            </View>
+            <View style={styles.iconCaptionContainer}>
+              <Image
+                source={{
+                  uri: 'https://i.ibb.co/YNYg4yz/h17-removebg-preview.png',
+                }}
+                style={styles.columnImage}
+              />
+              <Text style={styles.iconCaption}>Video Consult</Text>
+            </View>
           </View>
-          <View style={styles.infoCounts}>
-            <View style={styles.imageControl}>
+          <View style={styles.columnContainer}>
+            <View style={styles.iconCaptionContainer}>
               <Image
                 source={{
-                  uri: 'https://i.ibb.co/XbXrZyD/fire-white.png',
+                  uri: 'https://i.ibb.co/XVZdYWq/h14-removebg-preview.png',
                 }}
-                style={styles.profileIcon}
+                style={styles.columnImage}
               />
+              <Text style={styles.iconCaption}>Pharmacy</Text>
             </View>
-            <Text style={styles.countName}>calories</Text>
-            <Text style={styles.countValue}>756cal</Text>
-          </View>
-          <View style={styles.infoCounts}>
-            <View style={styles.imageControl}>
+            <View style={styles.iconCaptionContainer}>
               <Image
                 source={{
-                  uri: 'https://i.ibb.co/MftxbVK/n4-removebg-preview.png',
+                  uri: 'https://i.ibb.co/6yGWCfF/h15-removebg-preview.png',
                 }}
-                style={styles.profileIcon}
+                style={styles.columnImage}
               />
+              <Text style={styles.iconCaption}>Diseases</Text>
             </View>
-            <Text style={styles.countName}>Weight</Text>
-            <Text style={styles.countValue}>103lbs</Text>
+            <View style={styles.iconCaptionContainer}>
+              <Image
+                source={{
+                  uri: 'https://i.ibb.co/yBLshGr/h16-removebg-preview.png',
+                }}
+                style={styles.columnImage}
+              />
+              <Text style={styles.iconCaption}>Find Location</Text>
+            </View>
           </View>
         </View>
       </View>
-      <View style={styles.infoContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('screenOne');
-          }}
-          activeOpacity={0.7}
-          style={styles.naviagationContainer}>
-          <Text style={styles.userInfoOption}>MY Medical Record</Text>
-          <Image
-            source={{
-              uri: 'https://i.ibb.co/rMQLY9B/w3-removebg-preview.png',
-            }}
-            style={styles.navIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('screenOne');
-          }}
-          activeOpacity={0.7}
-          style={styles.naviagationContainer}>
-          <Text style={styles.userInfoOption}>Order a Mediscoot</Text>
-          <Image
-            source={{
-              uri: 'https://i.ibb.co/rMQLY9B/w3-removebg-preview.png',
-            }}
-            style={styles.navIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('screenOne');
-          }}
-          activeOpacity={0.7}
-          style={styles.naviagationContainer}>
-          <Text style={styles.userInfoOption}>Health Courage Repayment</Text>
-          <Image
-            source={{
-              uri: 'https://i.ibb.co/rMQLY9B/w3-removebg-preview.png',
-            }}
-            style={styles.navIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('screenOne');
-          }}
-          activeOpacity={0.7}
-          style={styles.naviagationContainer}>
-          <Text style={styles.userInfoOption}>Choice Your Assistant</Text>
-          <Image
-            source={{
-              uri: 'https://i.ibb.co/rMQLY9B/w3-removebg-preview.png',
-            }}
-            style={styles.navIcon}
-          />
-        </TouchableOpacity>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    height: '100%',
+  homeContainer: {
+    backgroundColor: '#38b89f',
+    height: 300,
+    // borderBottomRightRadius: 40,
+    // borderBottomLeftRadius: 40,
+    overflow: 'visible',
   },
   profileContainer: {
-    height: '50%',
-    backgroundColor: '#38b89f',
-  },
-  profileImage: {
-    height: '40%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    marginVertical: 20,
+    marginHorizontal: 20,
   },
   userImage: {
-    width: 100,
-    height: 100,
+    width: 60,
+    height: 60,
     resizeMode: 'contain',
-    borderRadius: 50,
+    borderRadius: 30,
   },
-  imageControl: {
-    width: '100%',
-    height: '60%',
+  profileImage: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  profileIcon: {
-    width: '80%',
-    height: '80%',
-    resizeMode: 'contain',
-  },
-  countName: {
+  userName: {
     color: '#FFF',
     fontSize: 14,
     fontWeight: 'bold',
   },
-  countValue: {
+  userCaption: {
     color: '#FFF',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 14,
   },
-  infoCounts: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  userInfo: {
-    height: '40%',
-    flexDirection: 'row',
+  userTextContainer: {
     justifyContent: 'space-around',
+    marginLeft: 10,
   },
-  infoContainer: {
-    marginTop: -22,
-    height: '54%',
-    borderTopLeftRadius: 26,
-    borderTopRightRadius: 26,
-    backgroundColor: '#FFF',
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-    justifyContent: 'space-between',
+  searchImage: {
+    height: 40,
+    width: 40,
+    resizeMode: 'contain',
   },
-  naviagationContainer: {
-    height: '16%',
+  iconContainer: {
+    marginTop: -180,
+    marginHorizontal: 30,
+    height: 300,
     borderRadius: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 10,
     backgroundColor: 'white',
     shadowColor: 'black',
     shadowOffset: {
@@ -190,15 +157,33 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 6,
-    elevation: 14,
   },
-  userInfoOption: {
-    fontSize: 18,
-    color: '#000000',
+  columnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
-  navIcon: {
-    width: 50,
-    height: 50,
+  userOptions: {
+    alignItems: 'center',
+    height: '100%',
+    justifyContent: 'space-evenly',
+    overflow: 'hidden',
+  },
+  columnImage: {
+    height: 80,
+    width: 80,
     resizeMode: 'contain',
+  },
+  iconCaption: {
+    fontSize: 14,
+    color: 'blue',
+    fontWeight: 'bold',
+    marginTop: 6,
+  },
+  iconCaptionContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '33%',
+    height: '100%',
+    // borderWidth: 0.5,
   },
 });
