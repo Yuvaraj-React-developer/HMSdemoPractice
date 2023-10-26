@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+
+
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,19 +8,47 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
+  Alert,
 } from 'react-native';
-import {Image, Input, Icon, CheckBox} from '@rneui/themed';
+import {Image} from '@rneui/themed'; 
 import LinearGradient from 'react-native-linear-gradient';
-import {Formik, Field} from 'formik';
+import {Formik} from 'formik'; 
+import {userregistrationdata} from './store/MiddleWare';
+import {AppDispatch} from '../../redux/store';
+import {useDispatch, useSelector} from 'react-redux';
 import * as Yup from 'yup';
+
 interface Screen {
   navigation: any;
 }
+
+interface UserData {
+  email: string;
+  password: string;
+  address: string;
+  gender: string;
+  name: string;
+}
+
 const RegistrationScreen: React.FC<Screen> = ({navigation}) => {
   const [isSelected, setSelection] = useState<boolean>(false);
-  const navigateToLogin = () => {
-    navigation.navigate('Login');
+  const [userData, setUserData] = useState<UserData | undefined>(undefined);
+  const dispatch: AppDispatch = useDispatch();
+
+  const navigateToLogin = (values: UserData) => {
+    dispatch(userregistrationdata([values]))
+      .then((response: any) => {
+        if (response.payload) {
+          navigation.navigate('Login');
+        } else {
+          console.log('Data set is not coming');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     gender: Yup.string().required('Gender is required'),
@@ -35,6 +65,7 @@ const RegistrationScreen: React.FC<Screen> = ({navigation}) => {
       .min(8, ({min}) => `Password must be at least ${min} characters`)
       .required('Password is required'),
   });
+
   return (
     <Formik
       initialValues={{
@@ -45,9 +76,9 @@ const RegistrationScreen: React.FC<Screen> = ({navigation}) => {
         name: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={values => {
-        console.log('Form values:', values);
-        navigateToLogin();
+      onSubmit={(values: UserData) => {
+        setUserData(values);
+        navigateToLogin(values);
       }}>
       {({handleSubmit, handleBlur, handleChange, values, touched, errors}) => (
         <View style={styles.container}>
@@ -122,7 +153,7 @@ const RegistrationScreen: React.FC<Screen> = ({navigation}) => {
             end={{x: 1, y: 0.5}}
             style={styles.buttonGradient}>
             <Pressable
-              onPress={handleSubmit}
+              onPress={() => handleSubmit()}
               style={({pressed}) => [
                 styles.buttonStyle,
                 {
