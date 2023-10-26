@@ -1,10 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from '../HomeModule/HomeScreen';
 import ScreenOne from '../HomeModule/ScreenOne';
 import ScreenTwo from '../HomeModule/ScreenTwo';
 import ScreenThree from '../HomeModule/ScreenThree';
+import ProfileScreen from '../ProfileModule/ProfileScreen';
 
 const SettingTab = () => {
   const Stack = createStackNavigator();
@@ -13,7 +13,7 @@ const SettingTab = () => {
       <Stack.Screen
         options={{headerShown: false}}
         name="SettingTab"
-        component={HomeScreen}
+        component={ProfileScreen}
       />
       <Stack.Screen
         // options={{headerShown: false}}
